@@ -8,13 +8,19 @@ struct Process {
     int arrivalTime;    // Time at which the process arrives in the system
 };
 
-// Function to implement the Bubble Sort algorithm for sorting processes by burst time
+// Function to implement the Bubble Sort algorithm for sorting processes by burst time and arrival time
 void bubbleSort(Process processes[], int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
-            // Compare burst times of adjacent processes
-            if (processes[j].burstTime > processes[j + 1].burstTime) {
-                // Swap processes[j] and processes[j+1] if they are out of order
+            // Compare arrival times
+            if (processes[j].arrivalTime > processes[j + 1].arrivalTime) {
+                // Swap processes[j] and processes[j+1] if they are out of order based on arrival time
+                swap(processes[j], processes[j + 1]);
+            }
+            // If arrival times are equal, compare burst times
+            else if (processes[j].arrivalTime == processes[j + 1].arrivalTime &&
+                     processes[j].burstTime > processes[j + 1].burstTime) {
+                // Swap processes[j] and processes[j+1] if they are out of order based on burst time
                 swap(processes[j], processes[j + 1]);
             }
         }
